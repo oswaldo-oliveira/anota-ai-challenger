@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: desafio-anota-ai
+  jpa:
+
