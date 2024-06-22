@@ -1,0 +1,34 @@
+@baseurl = http://localhost:8080
+@category_id = 6677324e46235a3a80a146af
+
+# @name create_category
+POST {{baseurl}}/api/category
+Content-Type: application/json
+
+{
+  "title": "test",
+  "description": "test",
+  "ownerId": "123123"
+}
+
+###
+
+# @name find_all_categories
+GET {{baseurl}}/api/category
+
+###
+
+# @name update_category
+PUT {{baseurl}}/api/category/{{category_id}}
+Content-Type: application/json
+
+{
+  "title": "test1",
+  "description": "test1"
+}
+
+###
+
+# @name delete_category
+DELETE {{baseurl}}/api/category/{{category_id}}
+Content-Type: application/json

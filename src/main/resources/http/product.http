@@ -1,0 +1,31 @@
+@baseurl = http://localhost:8080/api
+@product_id = 6677339646235a3a80a146b2
+
+# @name create_product
+POST {{baseurl}}/products
+Content-Type: application/json
+
+{
+  "title": "product",
+  "description": "product description",
+  "price": 123414,
+  "ownerId": "123123",
+  "categoryId": "6677330646235a3a80a146b1"
+}
+
+###
+
+# @name find_all_products
+GET {{baseurl}}/products
+
+###
+
+# @name update_product
+PUT {{baseurl}}/products/{{product_id}}
+Content-Type: application/json
+
+{
+  "title": "product",
+  "description": "product description",
+  "price": 10000
+}
