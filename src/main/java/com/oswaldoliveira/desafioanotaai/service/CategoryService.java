@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +23,10 @@ public class CategoryService {
 
     public List<Category> findAll() {
         return categoryRepository.findAll();
+    }
+
+    public Optional<Category> findById(String id) {
+        return categoryRepository.findById(id);
     }
 
     public Category updateCategory(CategoryDTO data, String id) {
