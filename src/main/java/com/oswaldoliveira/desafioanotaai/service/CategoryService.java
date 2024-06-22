@@ -26,7 +26,10 @@ public class CategoryService {
     }
 
     public Optional<Category> findById(String id) {
-        return categoryRepository.findById(id);
+        if (id != null) {
+            return categoryRepository.findById(id);
+        }
+        return Optional.empty();
     }
 
     public Category updateCategory(CategoryDTO data, String id) {
