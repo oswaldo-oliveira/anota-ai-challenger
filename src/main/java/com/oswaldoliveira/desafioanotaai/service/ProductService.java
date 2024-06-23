@@ -5,6 +5,8 @@ import com.oswaldoliveira.desafioanotaai.domain.product.Product;
 import com.oswaldoliveira.desafioanotaai.domain.product.ProductDTO;
 import com.oswaldoliveira.desafioanotaai.domain.product.exception.ProductNotFoundException;
 import com.oswaldoliveira.desafioanotaai.repository.ProductsRepository;
+import com.oswaldoliveira.desafioanotaai.service.aws.AwsSnsService;
+import com.oswaldoliveira.desafioanotaai.service.aws.MessageDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,7 @@ public class ProductService {
 
     private final ProductsRepository productsRepository;
     private final CategoryService categoryService;
+    private final AwsSnsService snsService;
 
 
     public Product createProduct(ProductDTO data) {
@@ -23,7 +26,9 @@ public class ProductService {
                 .orElseThrow(CategoryNotFoundException::new);
         var product = new Product(data);
         product.setCategory(category);
-        return productsRepository.save(product);
+        productsRepository.save(product);
+        snsService.publish(new MessageDTO(product.getOwnerId()));
+        return product;
     }
 
     public List<Product> findAll() {
@@ -39,6 +44,7 @@ public class ProductService {
         categoryService.findById(data.categoryId()).ifPresent(product::setCategory);
 
         productsRepository.save(product);
+        snsService.publish(new MessageDTO(product.getOwnerId()));
         return product;
     }
 

@@ -2,3 +2,14 @@ spring:
   application:
     name: desafio-anota-ai
 
+aws:
+  accessKeyId: {AWS_ACCESS_KEY_ID:KEY}
+  secretKey: {AWS_SECRET_ACCESS_KEY:SECRET}
+  region: us-east-1
+  sqs:
+    topic:
+      catolog:
+        arn: {ARN:arn}
+
+
+
